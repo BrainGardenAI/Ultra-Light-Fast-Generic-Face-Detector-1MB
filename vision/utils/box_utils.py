@@ -3,19 +3,19 @@ import math
 import torch
 
 
-def generate_priors(feature_map_list, shrinkage_list, image_size, min_boxes, clamp=True) -> torch.Tensor:
+def generate_priors(feature_map_list, shrinkage_list, image_size, min_boxes, clamp=True):
     priors = []
     for index in range(0, len(feature_map_list[0])):
-        scale_w = image_size[0] / shrinkage_list[0][index]
-        scale_h = image_size[1] / shrinkage_list[1][index]
+        scale_w = image_size[0] / float(shrinkage_list[0][index])
+        scale_h = image_size[1] / float(shrinkage_list[1][index])
         for j in range(0, feature_map_list[1][index]):
             for i in range(0, feature_map_list[0][index]):
                 x_center = (i + 0.5) / scale_w
                 y_center = (j + 0.5) / scale_h
 
                 for min_box in min_boxes[index]:
-                    w = min_box / image_size[0]
-                    h = min_box / image_size[1]
+                    w = min_box / float(image_size[0])
+                    h = min_box / float(image_size[1])
                     priors.append([
                         x_center,
                         y_center,
@@ -65,7 +65,7 @@ def convert_boxes_to_locations(center_form_boxes, center_form_priors, center_var
     ], dim=center_form_boxes.dim() - 1)
 
 
-def area_of(left_top, right_bottom) -> torch.Tensor:
+def area_of(left_top, right_bottom):
     """Compute the areas of rectangles given two corners.
 
     Args:

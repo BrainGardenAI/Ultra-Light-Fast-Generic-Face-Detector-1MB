@@ -1,3 +1,5 @@
+# -*- coding:utf-8 -*-
+
 # from https://github.com/amdegroot/ssd.pytorch
 
 

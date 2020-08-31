@@ -16,7 +16,7 @@ class Timer:
 
     def end(self, key="default"):
         if key not in self.clock:
-            raise Exception(f"{key} is not in the clock.")
+            raise Exception("{} is not in the clock.".format(key))
         interval = datetime.datetime.now() - self.clock[key]
         del self.clock[key]
         return interval.total_seconds()

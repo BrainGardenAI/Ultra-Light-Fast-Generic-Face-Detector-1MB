@@ -36,6 +36,11 @@ def define_img_size(size):
     for i in range(0, len(image_size)):
         item_list = []
         for k in range(0, len(feature_map_w_h_list[i])):
-            item_list.append(image_size[i] / feature_map_w_h_list[i][k])
+            item_list.append(image_size[i] / float(feature_map_w_h_list[i][k]))
         shrinkage_list.append(item_list)
     priors = generate_priors(feature_map_w_h_list, shrinkage_list, image_size, min_boxes)
+
+# TODO: fix this
+if type(priors) == list:
+    define_img_size(image_size[0])
+
